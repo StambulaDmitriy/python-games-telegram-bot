@@ -22,4 +22,4 @@ async def start(message: types.Message):
         await message.answer(
             f"Добро пожаловать в игровой бот.")
 
-    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard)
+    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)

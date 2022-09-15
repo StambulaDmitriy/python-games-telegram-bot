@@ -9,7 +9,7 @@ BLACKJACK_BUTTON_TEXT = '🀄️ Блекджек'
 RULES_BUTTON_TEXT = '❓ Правила'
 SUPPORT_BUTTON_TEXT = '🤖 Обратиться в поддержку'
 
-main_menu_keyboard = ReplyKeyboardMarkup(
+keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text=BALANCE_BUTTON_TEXT)],
         [KeyboardButton(text=HALYAVA_BUTTON_TEXT)],
