@@ -17,3 +17,6 @@ def register_commands():
     dp.message.register(handlers.help_command, F.text == keyboards.main_menu_keyboard.RULES_BUTTON_TEXT, state=None)
     dp.callback_query.register(handlers.help_inline_callback, HelpCallbackData.filter())
 
+    dp.message.register(handlers.balance_command, F.text == keyboards.main_menu_keyboard.BALANCE_BUTTON_TEXT, state=None)
+    dp.message.register(handlers.balance_command, Command(commands='balance'), state=None)
+
