@@ -1,2 +1,3 @@
-from .main_menu_keyboard import *
-from .inline import help_inline_keyboard
+from . import back_to_menu_keyboard
+from . import main_menu_keyboard
+from . import inline

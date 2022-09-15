@@ -1,11 +1,13 @@
 from aiogram import F
 from aiogram.filters import Command
 
-import keyboards.main_menu_keyboard
+import keyboards
 from bootstrap import MyDispatcher
 
 import handlers
+from handlers import dice_game_controller
 from keyboards.inline import HelpCallbackData
+from states.dice_game_states import DiceGameStates
 
 
 def register_commands():
@@ -19,4 +21,9 @@ def register_commands():
 
     dp.message.register(handlers.balance_command, F.text == keyboards.main_menu_keyboard.BALANCE_BUTTON_TEXT, state=None)
     dp.message.register(handlers.balance_command, Command(commands='balance'), state=None)
+
+    dp.message.register(dice_game_controller.start, F.text == keyboards.main_menu_keyboard.DICE_BUTTON_TEXT, state=None)
+    dp.message.register(dice_game_controller.start, Command(commands='dice'), state=None)
+    dp.message.register(dice_game_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, DiceGameStates.BetPending)
+    dp.message.register(dice_game_controller.handle_bet, DiceGameStates.BetPending)
 
