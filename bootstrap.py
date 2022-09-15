@@ -18,9 +18,9 @@ class Database(metaclass=MetaSingleton):
 
     def getInstance(self):
         if self.connection is None:
-            connection_string = "mongodb+srv://{username}:{password}@cluster0.xgs6e2y.mongodb.net/?retryWrites=true&w=majority"
+            connection_string = "mongodb+srv://{username}:{password}@{address}/?retryWrites=true&w=majority"
             self.connection = pymongo.MongoClient(
-                connection_string.format(username=config('db_user'), password=config('db_password')))
+                connection_string.format(username=config('db_user'), password=config('db_password'), address=config('db_address')))
         return self.connection
 
 
