@@ -1,13 +1,17 @@
 import asyncio
 
-from aiogram import Bot, Dispatcher
-
+import bootstrap
+import router
 from config import config
 
 
 async def main():
-    bot = Bot(token=config('token'), parse_mode="HTML")
-    dp = Dispatcher()
+    bootstrap.bootstrap()
+
+    bot = bootstrap.MyBot().getInstance()
+    dp = bootstrap.MyDispatcher().getInstance()
+
+    router.register_commands()
 
     for admin_id in config('admins'):
         await bot.send_message(admin_id, "<b>Бот запущен</b>")
