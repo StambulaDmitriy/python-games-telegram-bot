@@ -13,6 +13,7 @@ async def register_default_commands():
             BotCommand(command='dice', description='Начать игру в кости'),
             BotCommand(command='roulette', description='Начать игру в рулетку'),
             BotCommand(command='bagels', description='Начать игру в Багелс'),
+            BotCommand(command='blackjack', description='Начать игру Блекджек'),
             BotCommand(command='halyava', description='Получить денег нахаляву'),
         ]
     )

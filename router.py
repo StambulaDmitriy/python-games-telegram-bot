@@ -5,9 +5,10 @@ import keyboards
 from bootstrap import MyDispatcher
 
 import handlers
-from handlers import dice_game_controller, roulette_game_controller, bagels_game_controller
+from handlers import dice_game_controller, roulette_game_controller, bagels_game_controller, blackjack_game_controller
 from keyboards.inline import HelpCallbackData
 from states.bagels_game_states import BagelsGameStates
+from states.blackjack_game_states import BlackjackGameStates
 from states.dice_game_states import DiceGameStates
 from states.roulette_game_states import RouletteGameStates
 
@@ -44,3 +45,9 @@ def register_commands():
     dp.message.register(bagels_game_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, BagelsGameStates.BetPending)
     dp.message.register(bagels_game_controller.handle_bet, BagelsGameStates.BetPending)
     dp.message.register(bagels_game_controller.check_answer, BagelsGameStates.NumberGuessing)
+
+    dp.message.register(blackjack_game_controller.start, F.text == keyboards.main_menu_keyboard.BLACKJACK_BUTTON_TEXT, state=None)
+    dp.message.register(blackjack_game_controller.start, Command(commands='blackjack'), state=None)
+    dp.message.register(blackjack_game_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, BlackjackGameStates.BetPending)
+    dp.message.register(blackjack_game_controller.handle_bet, BlackjackGameStates.BetPending)
+    dp.message.register(blackjack_game_controller.handle_user_choice, BlackjackGameStates.UserPlaying)
