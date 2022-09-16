@@ -58,7 +58,7 @@ async def handle_bet(message: types.Message, state: FSMContext):
         balance_change = -bet
     elif user_res > dealer_res:
         answer += f"🥳 Вы выиграли <b>${bet}!</b>"
-        balance_change = bet*2
+        balance_change = bet
     else:
         answer += "😕 Ничья! Ставка возвращена."
         balance_change = 0

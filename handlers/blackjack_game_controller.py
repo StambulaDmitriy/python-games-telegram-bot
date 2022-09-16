@@ -110,12 +110,13 @@ async def blackjack_check_result(message: types.Message, state: FSMContext):
     dealer_value = get_hand_value(dealer_hand)
 
     balance_change = 0
+    win_payment = round(bet*1.5, 0)
     if player_value == 21:
-        await message.answer(f"🥳 У вас очко! Вы выиграли ${bet*2}")
-        balance_change = bet*2
+        await message.answer(f"🥳 У вас очко! Вы выиграли ${win_payment}")
+        balance_change = win_payment
     elif dealer_value > 21:
-        await message.answer(f'🥳 Диллер перебрал карт! Вы выиграли ${bet*2}!')
-        balance_change = bet*2
+        await message.answer(f'🥳 Диллер перебрал карт! Вы выиграли ${win_payment}!')
+        balance_change = win_payment
     elif player_value > 21:
         await message.answer(f'⚰️ Вы перебрали карт! Вы проиграли ${bet}!')
         balance_change = -bet
@@ -123,8 +124,8 @@ async def blackjack_check_result(message: types.Message, state: FSMContext):
         await message.answer(f'⚰️ Диллер набрал больше очков! Вы проиграли ${bet}!')
         balance_change = -bet
     elif player_value > dealer_value:
-        await message.answer(f'🥳 Вы набрали больше диллера! Вы выиграли ${bet*2}!')
-        balance_change = bet*2
+        await message.answer(f'🥳 Вы набрали больше диллера! Вы выиграли ${win_payment}!')
+        balance_change = win_payment
     elif player_value == dealer_value:
         await message.answer('😕 Ничья... Ставки возвращаются')
         balance_change = 0

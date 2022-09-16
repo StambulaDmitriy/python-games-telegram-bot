@@ -99,25 +99,25 @@ async def handle_bet_place(message: types.Message, state: FSMContext):
     await message.answer(spin_result_text)
     await asyncio.sleep(3)
 
-    win_places = {spin_result: 36}
+    win_places = {spin_result: 35}
 
     if spin_result != 0:
         if spin_result % 2 == 0:
-            win_places[keyboards.roulette_bet_places_keyboard.RED_PLACE_BUTTON_TEXT] = 2
+            win_places[keyboards.roulette_bet_places_keyboard.RED_PLACE_BUTTON_TEXT] = 1
         else:
-            win_places[keyboards.roulette_bet_places_keyboard.BLACK_PLACE_BUTTON_TEXT] = 2
+            win_places[keyboards.roulette_bet_places_keyboard.BLACK_PLACE_BUTTON_TEXT] = 1
 
         if spin_result in range(1,19):
-            win_places[keyboards.roulette_bet_places_keyboard.FIRST_HALF_PLACE_BUTTON_TEXT] = 2
+            win_places[keyboards.roulette_bet_places_keyboard.FIRST_HALF_PLACE_BUTTON_TEXT] = 1
         else:
-            win_places[keyboards.roulette_bet_places_keyboard.SECOND_HALF_PLACE_BUTTON_TEXT] = 2
+            win_places[keyboards.roulette_bet_places_keyboard.SECOND_HALF_PLACE_BUTTON_TEXT] = 1
 
         if spin_result in range(1, 37, 3):
-            win_places[keyboards.roulette_bet_places_keyboard.FIRST_COLUMN_PLACE_BUTTON_TEXT] = 3
+            win_places[keyboards.roulette_bet_places_keyboard.FIRST_COLUMN_PLACE_BUTTON_TEXT] = 2
         elif spin_result in range(2, 37, 3):
-            win_places[keyboards.roulette_bet_places_keyboard.SECOND_COLUMN_PLACE_BUTTON_TEXT] = 3
+            win_places[keyboards.roulette_bet_places_keyboard.SECOND_COLUMN_PLACE_BUTTON_TEXT] = 2
         elif spin_result in range(3, 37, 3):
-            win_places[keyboards.roulette_bet_places_keyboard.THIRD_COLUMN_PLACE_BUTTON_TEXT] = 3
+            win_places[keyboards.roulette_bet_places_keyboard.THIRD_COLUMN_PLACE_BUTTON_TEXT] = 2
 
     data = await state.get_data()
     bet = data['bet']

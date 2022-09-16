@@ -67,12 +67,12 @@ async def check_answer(message: types.Message, state: FSMContext):
     available_attempts = data['available_attempts']
 
     if secret_num == answer:
-        await message.answer(f"🥳 Ты угадал! Твой выигрыш составляет <b>${data['bet']}</b>")
+        await message.answer(f"🥳 Ты угадал! Твой выигрыш составляет <b>${data['bet']*2}</b>")
 
         client = Database().getInstance()
         client.casino.users.update_one({"_id": message.from_user.id}, {
             "$inc": {
-                "balance": bet
+                "balance": bet*2
             }
         })
 
