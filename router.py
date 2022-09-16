@@ -5,9 +5,10 @@ import keyboards
 from bootstrap import MyDispatcher
 
 import handlers
-from handlers import dice_game_controller
+from handlers import dice_game_controller, roulette_game_controller
 from keyboards.inline import HelpCallbackData
 from states.dice_game_states import DiceGameStates
+from states.roulette_game_states import RouletteGameStates
 
 
 def register_commands():
@@ -29,4 +30,11 @@ def register_commands():
     dp.message.register(dice_game_controller.start, Command(commands='dice'), state=None)
     dp.message.register(dice_game_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, DiceGameStates.BetPending)
     dp.message.register(dice_game_controller.handle_bet, DiceGameStates.BetPending)
+
+    dp.message.register(roulette_game_controller.start, F.text == keyboards.main_menu_keyboard.ROULETTE_BUTTON_TEXT, state=None)
+    dp.message.register(roulette_game_controller.start, Command(commands='roulette'), state=None)
+    dp.message.register(roulette_game_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, RouletteGameStates.BetSumPending)
+    dp.message.register(roulette_game_controller.handle_bet_sum, RouletteGameStates.BetSumPending)
+    dp.message.register(roulette_game_controller.return_to_bet, F.text == keyboards.roulette_bet_places_keyboard.BACK_TO_CHOOSE_BET_SUM, RouletteGameStates.BetPlacePending)
+    dp.message.register(roulette_game_controller.handle_bet_place, RouletteGameStates.BetPlacePending)
 

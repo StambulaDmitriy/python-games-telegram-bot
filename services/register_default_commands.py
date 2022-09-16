@@ -11,6 +11,7 @@ async def register_default_commands():
             BotCommand(command='help', description='Узнать правила'),
             BotCommand(command='balance', description='Узнать текущий баланс'),
             BotCommand(command='dice', description='Начать игру в кости'),
-            BotCommand(command='halyava', description='Получить денег нахаляву')
+            BotCommand(command='roulette', description='Начать игру в рулетку'),
+            BotCommand(command='halyava', description='Получить денег нахаляву'),
         ]
     )
