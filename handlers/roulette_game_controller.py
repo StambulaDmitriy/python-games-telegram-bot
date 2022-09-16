@@ -32,7 +32,7 @@ async def handle_bet_sum(message: types.Message, state: FSMContext):
     user = users_table.find_one({"_id": message.from_user.id})
 
     if user is None:
-        await message.answer("Вы не начинали работу с ботом. Для начала введите команду /start")
+        await message.answer("Вы не начинали работу с ботом. Для начала введите команду /start", reply_markup=types.ReplyKeyboardRemove())
         return
 
     bet_validating_res = validate_bet(message.text, user['balance'])
@@ -80,7 +80,7 @@ async def handle_bet_place(message: types.Message, state: FSMContext):
 
     bet_place = message.text
     await state.set_state(RouletteGameStates.ResultsPending)
-    await message.answer("Ставки приняты. Ставок больше нет.\nДиллер раскручивает рулетку...")
+    await message.answer("Ставки приняты. Ставок больше нет.\nДиллер раскручивает рулетку...", reply_markup=types.ReplyKeyboardRemove())
     await state.bot.send_chat_action(message.chat.id, "typing")
     await asyncio.sleep(3)
 

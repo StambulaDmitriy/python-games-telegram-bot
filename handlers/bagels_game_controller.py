@@ -31,7 +31,7 @@ async def handle_bet(message: types.Message, state: FSMContext):
     user = users_table.find_one({"_id": message.from_user.id})
 
     if user is None:
-        await message.answer("Вы не начинали работу с ботом. Для начала введите команду /start")
+        await message.answer("Вы не начинали работу с ботом. Для начала введите команду /start", reply_markup=types.ReplyKeyboardRemove())
         return
 
     bet_validating_res = validate_bet(message.text, user['balance'])
@@ -48,7 +48,7 @@ async def handle_bet(message: types.Message, state: FSMContext):
     await state.update_data(secret_num=secret_num, available_attempts=10, bet=bet)
     await state.set_state(BagelsGameStates.NumberGuessing)
 
-    await message.answer('Я загадал 3-х значное число! У тебя есть 10 попыток его угадать:')
+    await message.answer('Я загадал 3-х значное число! У тебя есть 10 попыток его угадать:', reply_markup=types.ReplyKeyboardRemove())
 
 
 async def check_answer(message: types.Message, state: FSMContext):
