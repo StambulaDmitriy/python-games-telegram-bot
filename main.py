@@ -9,6 +9,9 @@ from config import config
 async def main():
     bootstrap.bootstrap()
 
+    db = bootstrap.Database().getInstance()
+    db.casino.support_queue.delete_many({})
+
     bot = bootstrap.MyBot().getInstance()
     dp = bootstrap.MyDispatcher().getInstance()
 

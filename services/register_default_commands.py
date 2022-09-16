@@ -9,6 +9,7 @@ async def register_default_commands():
         commands=[
             BotCommand(command='start', description='Начать работу с ботом'),
             BotCommand(command='help', description='Узнать правила'),
+            BotCommand(command='support', description='Обратиться за помощью в поддержку'),
             BotCommand(command='balance', description='Узнать текущий баланс'),
             BotCommand(command='dice', description='Начать игру в кости'),
             BotCommand(command='roulette', description='Начать игру в рулетку'),
