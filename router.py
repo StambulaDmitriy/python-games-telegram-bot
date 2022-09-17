@@ -8,12 +8,13 @@ import handlers
 from config import config
 from filters import IsAdmin
 from handlers import dice_game_controller, roulette_game_controller, bagels_game_controller, blackjack_game_controller, \
-    support_chat_controller
+    support_chat_controller, horoscope_controller
 from keyboards.inline import HelpCallbackData
 from states.admin_support_states import AdminSupportStates
 from states.bagels_game_states import BagelsGameStates
 from states.blackjack_game_states import BlackjackGameStates
 from states.dice_game_states import DiceGameStates
+from states.horoscope_states import HoroscopeStates
 from states.roulette_game_states import RouletteGameStates
 from states.user_support_states import UserSupportStates
 
@@ -67,3 +68,9 @@ def register_commands():
     dp.message.register(support_chat_controller.admin_accept, Command(commands='next'), IsAdmin(), state=None)
     dp.message.register(support_chat_controller.admin_cancel_chat, Command(commands='cancel'), AdminSupportStates.Talking)
     dp.message.register(support_chat_controller.admin_talking, AdminSupportStates.Talking)
+
+    dp.message.register(horoscope_controller.horoscope_command, F.text == keyboards.main_menu_keyboard.HOROSCOPE_BUTTON_TEXT, state=None)
+    dp.message.register(horoscope_controller.handle_zodiak_sign, HoroscopeStates.SelectingSign)
+    dp.message.register(horoscope_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, HoroscopeStates.SelectingPeriod)
+    dp.message.register(horoscope_controller.handle_horoscope_period, HoroscopeStates.SelectingPeriod)
+
