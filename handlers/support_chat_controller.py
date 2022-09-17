@@ -9,8 +9,8 @@ from aiogram.fsm.context import FSMContext
 
 import keyboards.main_menu_keyboard
 from bootstrap import Database
-from states.admin_support_states import AdminSupportStates
-from states.user_support_states import UserSupportStates
+from states import AdminSupportStates
+from states import UserSupportStates
 
 
 async def user_initiates(message: types.Message, state: FSMContext):

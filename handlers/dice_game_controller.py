@@ -6,7 +6,7 @@ from aiogram.fsm.context import FSMContext
 import keyboards
 from bootstrap import Database
 from services import validate_bet
-from states.dice_game_states import DiceGameStates
+from states import DiceGameStates
 
 
 async def start(message: types.Message, state: FSMContext):

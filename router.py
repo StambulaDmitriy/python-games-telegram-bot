@@ -5,18 +5,11 @@ import keyboards
 from bootstrap import MyDispatcher
 
 import handlers
-from config import config
 from filters import IsAdmin
 from handlers import dice_game_controller, roulette_game_controller, bagels_game_controller, blackjack_game_controller, \
     support_chat_controller, horoscope_controller
 from keyboards.inline import HelpCallbackData
-from states.admin_support_states import AdminSupportStates
-from states.bagels_game_states import BagelsGameStates
-from states.blackjack_game_states import BlackjackGameStates
-from states.dice_game_states import DiceGameStates
-from states.horoscope_states import HoroscopeStates
-from states.roulette_game_states import RouletteGameStates
-from states.user_support_states import UserSupportStates
+from states import AdminSupportStates, BagelsGameStates, BlackjackGameStates, DiceGameStates, HoroscopeStates, RouletteGameStates, UserSupportStates
 
 
 def register_commands():

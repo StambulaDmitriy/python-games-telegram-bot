@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import keyboards
 from bootstrap import Database
 from services import invert_dict
-from states.horoscope_states import HoroscopeStates
+from states import HoroscopeStates
 
 zodiac_signs = {
     keyboards.zodiak_signs_keyboard.ARIES_SIGN_BUTTON_TEXT: 'aries',

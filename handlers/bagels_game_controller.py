@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 import keyboards
 from bootstrap import Database
 from services import validate_bet
-from states.bagels_game_states import BagelsGameStates
+from states import BagelsGameStates
 
 
 def generate_secret(num_length):
