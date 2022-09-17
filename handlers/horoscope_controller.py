@@ -115,7 +115,7 @@ async def handle_horoscope_period(message: types.Message, state: FSMContext):
 
     horoscope_prediction = await get_horoscope(zodiak_sign, horoscope_periods[horoscope_period])
 
-    result_string = "Гороскоп {} для знака задиака: {}\n".format(horoscope_period.lower(), invert_dict(zodiac_signs)[zodiak_sign])
+    result_string = "Гороскоп <b>{}</b> для знака зодиака: {}\n".format(horoscope_period.lower(), invert_dict(zodiac_signs)[zodiak_sign])
 
     result_string += horoscope_prediction
 
@@ -133,6 +133,6 @@ async def get_horoscope(zodiak_sign, horoscope_period):
 
             selected_paragraphs = map(lambda el: el.string, selected_tags)
 
-            result = "\n".join(selected_paragraphs)
+            result = "\n\n".join(selected_paragraphs)
 
     return result

@@ -70,6 +70,7 @@ def register_commands():
     dp.message.register(support_chat_controller.admin_talking, AdminSupportStates.Talking)
 
     dp.message.register(horoscope_controller.horoscope_command, F.text == keyboards.main_menu_keyboard.HOROSCOPE_BUTTON_TEXT, state=None)
+    dp.message.register(horoscope_controller.horoscope_command, Command(commands='horoscope'), state=None)
     dp.message.register(horoscope_controller.handle_zodiak_sign, HoroscopeStates.SelectingSign)
     dp.message.register(horoscope_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, HoroscopeStates.SelectingPeriod)
     dp.message.register(horoscope_controller.handle_horoscope_period, HoroscopeStates.SelectingPeriod)
