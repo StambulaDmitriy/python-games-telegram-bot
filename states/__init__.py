@@ -5,3 +5,4 @@ from .dice_game_states import DiceGameStates
 from .horoscope_states import HoroscopeStates
 from .roulette_game_states import RouletteGameStates
 from .user_support_states import UserSupportStates
+from .magic_8_ball_states import Magic8BallStates
