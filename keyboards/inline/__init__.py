@@ -1,2 +1,2 @@
-from .help_inline_keyboard import help_inline_keyboard
-from .help_callback_data import HelpCallbackData
+from .rules_inline_keyboard import rules_inline_keyboard
+from .rules_callback_data import RulesCallbackData

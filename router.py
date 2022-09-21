@@ -7,8 +7,8 @@ from bootstrap import MyDispatcher
 import handlers
 from filters import IsAdmin
 from handlers import dice_game_controller, roulette_game_controller, bagels_game_controller, blackjack_game_controller, \
-    support_chat_controller, horoscope_controller, magic_8_ball_controller
-from keyboards.inline import HelpCallbackData
+    support_chat_controller, horoscope_controller, magic_8_ball_controller, rules_controller
+from keyboards.inline import RulesCallbackData
 from states import AdminSupportStates, BagelsGameStates, BlackjackGameStates, DiceGameStates, HoroscopeStates, \
     RouletteGameStates, UserSupportStates, Magic8BallStates
 
@@ -18,9 +18,9 @@ def register_commands():
 
     dp.message.register(handlers.start, Command(commands='start'), state=None)
 
-    dp.message.register(handlers.help_command, Command(commands='help'))
-    dp.message.register(handlers.help_command, F.text == keyboards.main_menu_keyboard.RULES_BUTTON_TEXT, state=None)
-    dp.callback_query.register(handlers.help_inline_callback, HelpCallbackData.filter())
+    dp.message.register(rules_controller.rules_command, Command(commands='rules'))
+    dp.message.register(rules_controller.rules_command, F.text == keyboards.games_menu_keyboard.RULES_BUTTON_TEXT, state=None)
+    dp.callback_query.register(rules_controller.rules_inline_callback, RulesCallbackData.filter())
 
     dp.message.register(keyboards.games_menu_keyboard.send_keyboard, F.text == keyboards.main_menu_keyboard.GAMES_BUTTON_TEXT, state=None)
     dp.message.register(keyboards.main_menu_keyboard.send_keyboard, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MAINMENU_BUTTON_TEXT, state=None)

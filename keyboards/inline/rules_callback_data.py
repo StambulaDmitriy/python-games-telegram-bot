@@ -1,5 +1,5 @@
 from aiogram.filters.callback_data import CallbackData
 
 
-class HelpCallbackData(CallbackData, prefix='help'):
+class RulesCallbackData(CallbackData, prefix='rules'):
     game: str

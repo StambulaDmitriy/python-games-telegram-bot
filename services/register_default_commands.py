@@ -8,7 +8,7 @@ async def register_default_commands():
     return await bot.set_my_commands(
         commands=[
             BotCommand(command='start', description='Начать работу с ботом'),
-            BotCommand(command='help', description='Узнать правила'),
+            BotCommand(command='rules', description='Узнать правила игр'),
             BotCommand(command='support', description='Обратиться за помощью в поддержку'),
             BotCommand(command='balance', description='Узнать текущий баланс'),
             BotCommand(command='dice', description='Начать игру в кости'),

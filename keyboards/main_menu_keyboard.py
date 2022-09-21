@@ -5,13 +5,11 @@ from bootstrap import MyBot
 
 GAMES_BUTTON_TEXT = '🎮 Игры'
 ENTERTAINMENTS_BUTTON_TEXT = '🧩 Развлечения'
-RULES_BUTTON_TEXT = '❓ Правила'
 SUPPORT_BUTTON_TEXT = '🤖 Обратиться в поддержку'
 
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text=GAMES_BUTTON_TEXT), KeyboardButton(text=ENTERTAINMENTS_BUTTON_TEXT)],
-        [KeyboardButton(text=RULES_BUTTON_TEXT)],
         [KeyboardButton(text=SUPPORT_BUTTON_TEXT)]
     ],
     resize_keyboard=True
