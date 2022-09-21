@@ -13,7 +13,6 @@ from services import horoscope_mailing
 
 
 async def main():
-    logging.basicConfig(level=logging.DEBUG)
     bootstrap.bootstrap()
 
     db = bootstrap.Database().getInstance()
