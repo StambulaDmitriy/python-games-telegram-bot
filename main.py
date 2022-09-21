@@ -1,4 +1,6 @@
 import asyncio
+import datetime
+import logging
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger
@@ -7,13 +9,11 @@ import bootstrap
 import router
 import services
 from config import config
-
-
-async def ping(bot):
-    await bot.send_message(642914377, 'ping')
+from services import horoscope_mailing
 
 
 async def main():
+    logging.basicConfig(level=logging.DEBUG)
     bootstrap.bootstrap()
 
     db = bootstrap.Database().getInstance()
@@ -22,8 +22,8 @@ async def main():
     bot = bootstrap.MyBot().getInstance()
     dp = bootstrap.MyDispatcher().getInstance()
 
-    # scheduler = AsyncIOScheduler()
-    # scheduler.add_job(ping, IntervalTrigger(minutes=1), (bot,))
+    scheduler = AsyncIOScheduler()
+    scheduler.add_job(horoscope_mailing.mail_all_subscribers, IntervalTrigger(days=1, start_date=datetime.datetime.now().replace(hour=6, minute=0, second=0)))
 
     router.register_commands()
 
@@ -32,7 +32,7 @@ async def main():
     for admin_id in config('admins'):
         await bot.send_message(admin_id, "<b>Бот запущен</b>")
 
-    # scheduler.start()
+    scheduler.start()
     await dp.start_polling(bot)
 
 

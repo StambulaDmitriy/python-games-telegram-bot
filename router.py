@@ -73,6 +73,8 @@ def register_commands():
     dp.message.register(horoscope_controller.horoscope_command, Command(commands='horoscope'), state=None)
     dp.message.register(horoscope_controller.handle_zodiak_sign, HoroscopeStates.SelectingSign)
     dp.message.register(horoscope_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, HoroscopeStates.SelectingPeriod)
+    dp.message.register(horoscope_controller.subscribe_mailing, F.text == keyboards.horoscope_period_keyboard.SUBSCRIBE_BUTTON_TEXT, HoroscopeStates.SelectingPeriod)
+    dp.message.register(horoscope_controller.unsubscribe_mailing, F.text == keyboards.horoscope_period_keyboard.UNSUBSCRIBE_BUTTON_TEXT, HoroscopeStates.SelectingPeriod)
     dp.message.register(horoscope_controller.handle_horoscope_period, HoroscopeStates.SelectingPeriod)
 
     dp.message.register(magic_8_ball_controller.start, F.text == keyboards.entertainments_menu_keyboard.MAGIC_8_BALL_BUTTON_TEXT, state=None)

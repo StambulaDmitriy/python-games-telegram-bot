@@ -52,7 +52,17 @@ async def select_zodiak_sign(message: types.Message, state: FSMContext):
 
 async def select_horoscope_period(message: types.Message, state: FSMContext):
     await state.set_state(HoroscopeStates.SelectingPeriod)
-    await message.answer("Выберите период гороскопа:", reply_markup=keyboards.horoscope_period_keyboard.keyboard)
+
+    db = Database().getInstance()
+    users_table = db.casino.users
+    user = users_table.find_one({"_id": message.from_user.id})
+
+    if 'is_subscribed_horoscope_mailing' not in user or user['is_subscribed_horoscope_mailing'] == False:
+        kb = keyboards.horoscope_period_keyboard.get_keyboard_to_unsubscriber()
+    else:
+        kb = keyboards.horoscope_period_keyboard.get_keyboard_to_subscriber()
+
+    await message.answer("Выберите период гороскопа:", reply_markup=kb)
 
 
 async def return_to_menu(message: types.Message, state: FSMContext):
@@ -136,3 +146,27 @@ async def get_horoscope(zodiak_sign, horoscope_period):
             result = "\n\n".join(selected_paragraphs)
 
     return result
+
+
+async def subscribe_mailing(message: types.Message):
+    db = Database().getInstance()
+    users_table = db.casino.users
+    users_table.update_one({"_id": message.from_user.id}, {
+        "$set": {
+            'is_subscribed_horoscope_mailing': True
+        }
+    })
+
+    await message.answer("Вы успешно подписались на ежедневную рассылку гороскопа. Рассылка будет выполнятся ежедневно в 9:00", reply_markup=keyboards.horoscope_period_keyboard.get_keyboard_to_subscriber())
+
+
+async def unsubscribe_mailing(message: types.Message):
+    db = Database().getInstance()
+    users_table = db.casino.users
+    users_table.update_one({"_id": message.from_user.id}, {
+        "$set": {
+            'is_subscribed_horoscope_mailing': False
+        }
+    })
+
+    await message.answer("Вы успешно отписались от ежедневной рассылки гороскопа.", reply_markup=keyboards.horoscope_period_keyboard.get_keyboard_to_unsubscriber())
