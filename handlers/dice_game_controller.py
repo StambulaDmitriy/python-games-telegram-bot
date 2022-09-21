@@ -10,13 +10,13 @@ from states import DiceGameStates
 
 
 async def start(message: types.Message, state: FSMContext):
-    await message.answer("Введите ставку:", reply_markup=keyboards.back_to_menu_keyboard.keyboard)
+    await message.answer("Введите ставку:", reply_markup=keyboards.back_to_menu_keyboard.to_submenu_keyboard)
     await state.set_state(DiceGameStates.BetPending)
 
 
 async def return_to_menu(message: types.Message, state: FSMContext):
     await state.clear()
-    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)
+    await keyboards.games_menu_keyboard.send_keyboard(message)
 
 
 async def handle_bet(message: types.Message, state: FSMContext):

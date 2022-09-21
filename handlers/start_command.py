@@ -20,6 +20,7 @@ async def start(message: types.Message):
             "halyava_available_at": datetime.now(),
         })
         await message.answer(
-            f"Добро пожаловать в игровой бот.")
+            f"Бот привествует вас и готов к работе!")
 
-    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)
+    await keyboards.main_menu_keyboard.send_keyboard(message)
+

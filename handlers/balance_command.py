@@ -15,4 +15,4 @@ async def balance_command(message: types.Message):
         return
 
     await message.answer(f"Ваш баланс: <b>${user['balance']}</b>")
-    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)
+    await keyboards.games_menu_keyboard.send_keyboard(message)

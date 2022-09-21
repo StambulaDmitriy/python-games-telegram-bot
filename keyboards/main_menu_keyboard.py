@@ -1,26 +1,27 @@
+from aiogram import types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-BALANCE_BUTTON_TEXT = '💰 Баланс'
-HALYAVA_BUTTON_TEXT = '🎁 Получить халяву'
-MAGIC_8_BALL_BUTTON_TEXT = '🎱 Шар предсказаний'
-HOROSCOPE_BUTTON_TEXT = '🪬 Гороскоп'
-BAGELS_BUTTON_TEXT = '👾 Багелс'
-DICE_BUTTON_TEXT = '🎲 Кости'
-ROULETTE_BUTTON_TEXT = '🧿 Рулетка'
-BLACKJACK_BUTTON_TEXT = '🀄️ Блекджек'
+from bootstrap import MyBot
+
+GAMES_BUTTON_TEXT = '🎮 Игры'
+ENTERTAINMENTS_BUTTON_TEXT = '🧩 Развлечения'
 RULES_BUTTON_TEXT = '❓ Правила'
 SUPPORT_BUTTON_TEXT = '🤖 Обратиться в поддержку'
 
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text=BALANCE_BUTTON_TEXT)],
-        [KeyboardButton(text=HALYAVA_BUTTON_TEXT)],
-        [KeyboardButton(text=HOROSCOPE_BUTTON_TEXT)],
-        [KeyboardButton(text=MAGIC_8_BALL_BUTTON_TEXT)],
-        [KeyboardButton(text=BAGELS_BUTTON_TEXT)],
-        [KeyboardButton(text=DICE_BUTTON_TEXT), KeyboardButton(text=ROULETTE_BUTTON_TEXT), KeyboardButton(text=BLACKJACK_BUTTON_TEXT)],
+        [KeyboardButton(text=GAMES_BUTTON_TEXT), KeyboardButton(text=ENTERTAINMENTS_BUTTON_TEXT)],
         [KeyboardButton(text=RULES_BUTTON_TEXT)],
         [KeyboardButton(text=SUPPORT_BUTTON_TEXT)]
     ],
     resize_keyboard=True
 )
+
+
+async def send_keyboard(message: types.Message):
+    await message.answer("Выберите пункт меню:", reply_markup=keyboard)
+
+
+async def send_keyboard_by_chat_id(chat_id):
+    bot = MyBot().getInstance()
+    await bot.send_message(chat_id, "Выберите пункт меню:", reply_markup=keyboard)

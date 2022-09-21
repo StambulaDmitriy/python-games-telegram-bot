@@ -57,7 +57,7 @@ async def select_horoscope_period(message: types.Message, state: FSMContext):
 
 async def return_to_menu(message: types.Message, state: FSMContext):
     await state.clear()
-    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)
+    await keyboards.entertainments_menu_keyboard.send_keyboard(message)
 
 
 async def handle_zodiak_sign(message: types.Message, state: FSMContext):

@@ -32,13 +32,14 @@ answers = [
 
 async def start(message: types.Message, state: FSMContext):
     await state.set_state(Magic8BallStates.QuestionPending)
-    await message.answer("Задай мне вопрос. Постарайся, чтобы он был чётким, и не воспринимался двойственно.", reply_markup=keyboards.back_to_menu_keyboard.keyboard)
+    await message.answer("Задай мне вопрос. Постарайся, чтобы он был чётким, и не воспринимался двойственно.", reply_markup=keyboards.back_to_menu_keyboard.to_submenu_keyboard)
 
 
 async def answer(message: types.Message):
-    await message.answer(random.choice(answers), reply_markup=keyboards.back_to_menu_keyboard.keyboard)
+    await message.answer(random.choice(answers), reply_markup=keyboards.back_to_menu_keyboard.to_submenu_keyboard)
 
 
 async def return_to_menu(message: types.Message, state: FSMContext):
     await state.clear()
-    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)
+    await keyboards.entertainments_menu_keyboard.send_keyboard(message)
+

@@ -38,5 +38,5 @@ async def halyava_command(message: types.Message):
     else:
         await message.answer("Следующая халява будет доступна " + halyava_available_at.astimezone(timezone(timedelta(hours=3), name='Europe/Moscow')).strftime("%d.%m.%Y в %H:%M:%S"))
 
-    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)
+    await keyboards.games_menu_keyboard.send_keyboard(message)
 

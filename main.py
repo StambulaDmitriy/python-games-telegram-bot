@@ -1,9 +1,16 @@
 import asyncio
 
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler.triggers.interval import IntervalTrigger
+
 import bootstrap
 import router
 import services
 from config import config
+
+
+async def ping(bot):
+    await bot.send_message(642914377, 'ping')
 
 
 async def main():
@@ -15,6 +22,9 @@ async def main():
     bot = bootstrap.MyBot().getInstance()
     dp = bootstrap.MyDispatcher().getInstance()
 
+    # scheduler = AsyncIOScheduler()
+    # scheduler.add_job(ping, IntervalTrigger(minutes=1), (bot,))
+
     router.register_commands()
 
     await services.register_default_commands()
@@ -22,6 +32,7 @@ async def main():
     for admin_id in config('admins'):
         await bot.send_message(admin_id, "<b>Бот запущен</b>")
 
+    # scheduler.start()
     await dp.start_polling(bot)
 
 

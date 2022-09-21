@@ -68,7 +68,8 @@ async def user_cancel_chat(message: types.Message, state: FSMContext):
         await state.clear()
 
     await message.answer("Вы закончили чат")
-    await message.answer("Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)
+    await keyboards.main_menu_keyboard.send_keyboard(message)
+
 
 async def admin_accept(message: types.Message, state: FSMContext):
     db = Database().getInstance()
@@ -110,7 +111,7 @@ async def admin_cancel_chat(message: types.Message, state: FSMContext):
 
     await message.answer("Вы закончили чат")
     await state.bot.send_message(supporting_user_id, "<b>Администратор покинул чат</b>")
-    await state.bot.send_message(supporting_user_id, "Выберите пункт меню:", reply_markup=keyboards.main_menu_keyboard.keyboard)
+    await keyboards.main_menu_keyboard.send_keyboard_by_chat_id(supporting_user_id)
 
 
 async def admin_talking(message: types.Message, state: FSMContext):
