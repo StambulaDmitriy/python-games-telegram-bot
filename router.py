@@ -59,9 +59,9 @@ def register_commands():
 
     dp.message.register(support_chat_controller.user_initiates, F.text == keyboards.main_menu_keyboard.SUPPORT_BUTTON_TEXT, state=None)
     dp.message.register(support_chat_controller.user_initiates, Command(commands='support'), state=None)
-    dp.message.register(support_chat_controller.user_cancel_chat, Command(commands='cancel'), UserSupportStates.ConnectionPending)
+    dp.message.register(support_chat_controller.user_cancel_chat, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MAINMENU_BUTTON_TEXT, UserSupportStates.ConnectionPending)
     dp.message.register(support_chat_controller.user_pending_connection, UserSupportStates.ConnectionPending)
-    dp.message.register(support_chat_controller.user_cancel_chat, Command(commands='cancel'), UserSupportStates.Talking)
+    dp.message.register(support_chat_controller.user_cancel_chat, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MAINMENU_BUTTON_TEXT, UserSupportStates.Talking)
     dp.message.register(support_chat_controller.user_talking, UserSupportStates.Talking)
     dp.callback_query.register(support_chat_controller.admin_accept_inline, F.data == 'support:next')
     dp.message.register(support_chat_controller.admin_accept, Command(commands='next'), IsAdmin(), state=None)
