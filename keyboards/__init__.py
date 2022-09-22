@@ -6,5 +6,6 @@ from . import zodiak_signs_keyboard
 from . import horoscope_period_keyboard
 from . import entertainments_menu_keyboard
 from . import games_menu_keyboard
+from . import joke_reaction_keyboard
 from . import inline
 

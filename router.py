@@ -7,10 +7,11 @@ from bootstrap import MyDispatcher
 import handlers
 from filters import IsAdmin
 from handlers import dice_game_controller, roulette_game_controller, bagels_game_controller, blackjack_game_controller, \
-    support_chat_controller, horoscope_controller, magic_8_ball_controller, rules_controller
+    support_chat_controller, horoscope_controller, magic_8_ball_controller, rules_controller, jokes_controller
 from keyboards.inline import RulesCallbackData
 from states import AdminSupportStates, BagelsGameStates, BlackjackGameStates, DiceGameStates, HoroscopeStates, \
     RouletteGameStates, UserSupportStates, Magic8BallStates
+from states.joke_states import JokeStates
 
 
 def register_commands():
@@ -81,3 +82,8 @@ def register_commands():
     dp.message.register(magic_8_ball_controller.start, F.text == keyboards.entertainments_menu_keyboard.MAGIC_8_BALL_BUTTON_TEXT, state=None)
     dp.message.register(magic_8_ball_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, Magic8BallStates.QuestionPending)
     dp.message.register(magic_8_ball_controller.answer, Magic8BallStates.QuestionPending)
+
+    dp.message.register(jokes_controller.joke_command, F.text == keyboards.entertainments_menu_keyboard.JOKE_BUTTON_TEXT, state=None)
+    dp.message.register(jokes_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, state=JokeStates.ReactionPending)
+    dp.message.register(jokes_controller.handle_reaction, state=JokeStates.ReactionPending)
+
