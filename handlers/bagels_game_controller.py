@@ -48,7 +48,7 @@ async def handle_bet(message: types.Message, state: FSMContext):
     await state.update_data(secret_num=secret_num, available_attempts=10, bet=bet)
     await state.set_state(BagelsGameStates.NumberGuessing)
 
-    await message.answer('Я загадал 3-х значное число! У тебя есть 10 попыток его угадать:', reply_markup=types.ReplyKeyboardRemove())
+    await message.answer('Я загадал 3-х значное число! У тебя есть 10 попыток его угадать:')
 
 
 async def check_answer(message: types.Message, state: FSMContext):

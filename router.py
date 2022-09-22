@@ -48,6 +48,7 @@ def register_commands():
     dp.message.register(bagels_game_controller.start, Command(commands='bagels'), state=None)
     dp.message.register(bagels_game_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, BagelsGameStates.BetPending)
     dp.message.register(bagels_game_controller.handle_bet, BagelsGameStates.BetPending)
+    dp.message.register(bagels_game_controller.return_to_menu, F.text == keyboards.back_to_menu_keyboard.BACK_TO_MENU_BUTTON_TEXT, BagelsGameStates.NumberGuessing)
     dp.message.register(bagels_game_controller.check_answer, BagelsGameStates.NumberGuessing)
 
     dp.message.register(blackjack_game_controller.start, F.text == keyboards.games_menu_keyboard.BLACKJACK_BUTTON_TEXT, state=None)
