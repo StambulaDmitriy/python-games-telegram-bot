@@ -97,7 +97,7 @@ async def blackjack_check_result(message: types.Message, state: FSMContext):
 
     if get_hand_value(user_hand) < 21:
         await state.set_state(BlackjackGameStates.DealerPlaying)
-        await message.answer("Диллер раскрывает первую карту")
+        await message.answer("Диллер раскрывает первую карту", reply_markup=types.ReplyKeyboardRemove())
         await message.answer("\n".join(get_display_hands(user_hand, dealer_hand, True)))
         await asyncio.sleep(3)
         while get_hand_value(dealer_hand) < 17:
