@@ -35,7 +35,7 @@ async def user_initiates(message: types.Message, state: FSMContext):
     user_tuple = next(filter(lambda enum_tuple: enum_tuple[1]['_id'] == user_id, enumerate(queue)))
 
     queue_pos = user_tuple[0] + 1
-    await message.answer(f"Ваш номер в очереди: {queue_pos}. Ожидайте подключения администратора...", reply_markup=keyboards.back_to_menu_keyboard.BACK_TO_MAINMENU_BUTTON_TEXT)
+    await message.answer(f"Ваш номер в очереди: {queue_pos}. Ожидайте подключения администратора...", reply_markup=keyboards.back_to_menu_keyboard.to_mainmenu_keyboard)
 
     reply_keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text="Подключиться", callback_data='support:next')]])
     await state.bot.send_message(642914377, f"<b>Новый пользователь в очереди на чат. Всего в очереди: {queue_pos}</b>\nКомманда для взаимодействия /next", reply_markup=reply_keyboard)
